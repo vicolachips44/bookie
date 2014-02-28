@@ -83,6 +83,10 @@ public class BookmarkList extends JScrollPane implements MouseListener {
 	}
 	
 	private void doNavigate() {
+		if (table.getSelectedRow() < 0) {
+			return;
+		}
+		
 		int row = table.convertRowIndexToModel(table.getSelectedRow());
 		String url = (String) table.getModel().getValueAt(row, 2);
 		BareBonesBrowserLaunch.openURL(url);

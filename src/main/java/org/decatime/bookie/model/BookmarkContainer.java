@@ -13,10 +13,15 @@ public class BookmarkContainer {
 	private List<BookmarkObj> content;
 	
 	public BookmarkContainer() {
+		init();
+	}
+	
+	private void init() {
 		this.content = new ArrayList<BookmarkObj>();
 	}
 	
 	public void addBookmark(BookmarkObj obj) {
+		if (this.content == null) { this.init(); }
 		this.content.add(obj);
 	}
 
@@ -34,6 +39,8 @@ public class BookmarkContainer {
 	}
 
 	public boolean urlExists(String url) {
+		if (this.content == null) { this.init(); }
+		
 		for (BookmarkObj bookmark : this.content) {
 			if (bookmark.getUrl().compareTo(url) == 0) {
 				return true;

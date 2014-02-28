@@ -43,6 +43,10 @@ public final class XmlBookmarkManager implements IBookmarkProvider {
 	}
 	
 	public boolean create(String url) {
+		if (this.bookmarkContainer == null) {
+			return false;
+		}
+		
 		if (this.bookmarkContainer.urlExists(url)) {
 			return false;
 		}
@@ -69,15 +73,16 @@ public final class XmlBookmarkManager implements IBookmarkProvider {
 		
 		Vector<Object> rowData = new Vector<Object>();
 		List<BookmarkObj> bookmarks = this.bookmarkContainer.getBookmarks();
-		
-		for (BookmarkObj bookmark : bookmarks) {
-			Vector<String> line = new Vector<String>();
-			
-			line.add(bookmark.getCategory());
-			line.add(bookmark.getDescription());
-			line.add(bookmark.getUrl());
-			
-			rowData.add(line);
+		if (bookmarks != null) {
+			for (BookmarkObj bookmark : bookmarks) {
+				Vector<String> line = new Vector<String>();
+				
+				line.add(bookmark.getCategory());
+				line.add(bookmark.getDescription());
+				line.add(bookmark.getUrl());
+				
+				rowData.add(line);
+			}
 		}
 		
 		return rowData;

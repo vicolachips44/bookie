@@ -143,4 +143,10 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	<repositories>
+      <repository>
+         <id>srv1</id>
+         <url>http://192.168.1.21:8180/archiva/repository/internal</url>
+      </repository>
+   </repositories>
 </project>

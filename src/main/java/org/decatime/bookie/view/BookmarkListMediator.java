@@ -30,6 +30,10 @@ public class BookmarkListMediator extends Mediator {
 			JXTable table = (JXTable) args[0];
 			Frame parent  = (Frame) args[1];
 			
+			if (table.getSelectedRow() < 0) {
+				return;
+			}
+			
 			int row = table.convertRowIndexToModel(table.getSelectedRow());
 
 			String category      = (String) table.getModel().getValueAt(row, 0);

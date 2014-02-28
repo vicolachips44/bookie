@@ -2,4 +2,7 @@
 .project
 .classpath
 target
+.settings
+bookie-config.xml
+bookie-bookmarks.xml
 
