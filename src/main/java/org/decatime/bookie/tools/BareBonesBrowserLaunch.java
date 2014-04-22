@@ -26,13 +26,14 @@ public class BareBonesBrowserLaunch {
 	static final String errMsg = "Error attempting to launch web browser";
 
 	public static void openURL(String url) {
-		try { // attempt to use Desktop library from JDK 1.6+
+		// on ajout http autrement ça plantouille!
+		url = "http://" + url;
+		try {
 			Class<?> d = Class.forName("java.awt.Desktop");
 			d.getDeclaredMethod("browse", new Class[] { java.net.URI.class })
 					.invoke(d.getDeclaredMethod("getDesktop").invoke(null),
 							new Object[] { java.net.URI.create(url) });
-			// above code mimicks: java.awt.Desktop.getDesktop().browse()
-		} catch (Exception ignore) { // library not available or failed
+		} catch (Exception ignore) {
 			String osName = System.getProperty("os.name");
 			try {
 				if (Desktop.isDesktopSupported()) {
@@ -49,7 +50,7 @@ public class BareBonesBrowserLaunch {
 					} else if (osName.startsWith("Windows"))
 						Runtime.getRuntime().exec(
 								"rundll32 url.dll,FileProtocolHandler " + url);
-					else { // assume Unix or Linux
+					else {
 						String browser = null;
 						for (String b : browsers)
 							if (browser == null
